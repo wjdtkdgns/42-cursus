@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,22 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	size_t	len;
+	size_t	idx;
+	char	*temp;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
+	if (!s || !f)
 		return (0);
-	if (d < s)
+	len = ft_strlen(s);
+	if (!(temp = (char *)malloc(len + 1)))
+		return (0);
+	idx = 0;
+	while (idx < len)
 	{
-		while (len--)
-			*d++ = *s++;
+		temp[idx] = f(idx, s[idx]);
+		idx++;
 	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	return temp;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,17 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	size_t	idx;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
-		return (0);
-	if (d < s)
+	if (!s || !f)
+		return ;
+	idx = 0;
+	while (s[idx])
 	{
-		while (len--)
-			*d++ = *s++;
+		f(idx, &s[idx]);
+		idx++;
 	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	return ;
 }

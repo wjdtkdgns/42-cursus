@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,22 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	int		src_len;
+	char	*temp;
+	int		idx;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
+	src_len = ft_strlen(s1);
+	temp = (char *)malloc(src_len + 1);
+	if (!temp)
 		return (0);
-	if (d < s)
+	idx = 0;
+	while (idx < src_len)
 	{
-		while (len--)
-			*d++ = *s++;
+		temp[idx] = s1[idx];
+		idx++;
 	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	temp[idx] = 0;
+	return (temp);
 }

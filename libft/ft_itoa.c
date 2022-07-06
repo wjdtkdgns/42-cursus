@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,39 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	unsigned char	*d;
-	unsigned char	*s;
+int	intlen(int n){
+	int	len;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
+	len = 0;
+	if (n < 0)
+		len++;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return len;
+}	
+
+char	*ft_itoa(int n)
+{
+	int				len;
+	char			*temp;
+	unsigned int	tempint;
+
+	len = intlen(n);
+	temp = (char *)malloc(len + 1);
+	if (!temp)
 		return (0);
-	if (d < s)
+	tempint = n;
+	if (n < 0)
 	{
-		while (len--)
-			*d++ = *s++;
+		tempint = -n;
+		temp[0] = '-';
 	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	temp[len] = 0;
+	temp[--len] = tempint % 10 + '0';
+	while (tempint /= 10)
+		temp[--len] = tempint % 10 + '0';
+	return (temp);
 }

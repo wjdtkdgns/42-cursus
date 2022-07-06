@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,20 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	int		len1;
+	int		len2;
+	char	*temp;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
+	if(!s1 || !s2)
 		return (0);
-	if (d < s)
-	{
-		while (len--)
-			*d++ = *s++;
-	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	temp = (char *)malloc(len1 + len2 + 1);
+	if (!temp)
+		return (0);
+	ft_strlcpy(temp, s1, len1 + 1);
+	ft_strlcat(temp, s2, len1 + len2 + 1);
+	return (temp);
 }

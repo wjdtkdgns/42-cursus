@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,27 +11,13 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-int		ft_atoi(const char *str)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int i;
-	int minus;
-	int result;
+	void	*temp;
 
-	i = 0;
-	minus = 1;
-	result = 0;
-	while (str[i] == ' ' || ('/t' <= str[i] && str[i] <= '/r'))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			minus = -1;
-		i++;
-	}
-	while (str[i] != '\0' && '0' <= str[i] && str[i] <= '9')
-	{
-		result = result * 10 + str[i] - '0';
-		i++;
-	}
-	return (result * minus);
+	temp = malloc(count * size);
+	if (!temp)
+		return (0);
+	ft_bzero(temp, count * size);
+	return (temp);
 }

@@ -19,18 +19,18 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	idx = 0;
 	if (*needle == '\0')
-		return (haystack);
+		return ((char *)haystack);
 	while (haystack[idx] && len--)
 	{
-		orgin = &haystack[idx];
-		search = needle;
+		orgin = (char *)&haystack[idx];
+		search = (char *)needle;
 		while (*orgin == *search && *orgin && *search)
 		{
 			search++;
 			orgin++;
 		}
 		if (*search == 0)
-			return (&(haystack[idx]));
+			return ((char *)&(haystack[idx]));
 		idx++;
 	}
 	return (0);

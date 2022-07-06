@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,26 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	char	*temp;
+	size_t	strlen;
+	size_t	curidx;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (dst == 0 && src == 0)
+	if (!s)
 		return (0);
-	if (d < s)
+	strlen = ft_strlen(s);
+	if (strlen < start)
+		return ft_strdup("");
+	temp = (void *)malloc(len - start + 2);
+	if (!temp)
+		return (0);
+	curidx = start;
+	while (s[curidx])
 	{
-		while (len--)
-			*d++ = *s++;
+		temp[curidx - start] = s[curidx];
+		curidx++;
 	}
-	else
-	{
-		while (len--)
-			*(d + len) = *(s + len);
-	}
-	return (dst);
+	temp[curidx] = 0;
+	return (temp);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghjeo <sanghjeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,21 +11,57 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	word_cnt(char *s, char c)
 {
-	size_t	idx;
-	size_t	len;
+	size_t	count;
 
-	idx = 0;
-	len = ft_strlen(src);
-	if (dstsize != 0)
+	count = 0;
+	while (*s)
 	{
-		while (src[idx] && idx < dstsize - 1)
+		if (*s != c)
 		{
-			dst[idx] = src[idx];
+			count++;
+			while (*s && *s != c)
+				s++;
+		}
+		s++;
+	}
+	return (count);
+}
+
+char	**freeel(char **temp, size_t idx)
+{
+	while (idx--)
+		free(temp[idx]);
+	free(temp);
+	temp = 0;
+	return (0);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**temp;
+	char	*str_start;
+	size_t	idx;
+
+	if (!(temp = (char **)malloc(sizeof(char *) * word_cnt((char *)s, c) + 1)))
+		return (0);
+	idx = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			str_start = (char *)s;
+			while (*s && *s != c)
+				s++;
+			if(!(temp[idx] = (char *)malloc(s - str_start + 1)))
+				return (freeel(temp, idx));
+			ft_strlcpy(temp[idx], str_start, s - str_start + 1);
 			idx++;
 		}
-		dst[idx] = '\0';
+		else
+			s++;
 	}
-	return (len);
+	temp[idx] = 0;
+	return (temp);
 }
