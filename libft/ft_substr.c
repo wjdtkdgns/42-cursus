@@ -15,22 +15,18 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*temp;
 	size_t	strlen;
-	size_t	curidx;
 
 	if (!s)
 		return (0);
 	strlen = ft_strlen(s);
 	if (strlen < start)
 		return ft_strdup("");
-	temp = (void *)malloc(len - start + 2);
+	if (strlen < len)
+		len = strlen;
+	temp = (void *)malloc(len + 1);
 	if (!temp)
 		return (0);
-	curidx = start;
-	while (s[curidx])
-	{
-		temp[curidx - start] = s[curidx];
-		curidx++;
-	}
-	temp[curidx] = 0;
+	ft_memcpy(temp, s + start, len);
+	temp[len] = 0;
 	return (temp);
 }

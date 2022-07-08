@@ -22,7 +22,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{	
 		if (s1[idx] != s2[idx])
 		{
-			ans = s1[idx] - s2[idx];
+			ans = (unsigned char)s1[idx] - (unsigned char)s2[idx];
 			return (ans);
 		}
 		idx++;

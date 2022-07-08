@@ -28,5 +28,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		temp[idx] = f(idx, s[idx]);
 		idx++;
 	}
+	temp[len] = 0;
 	return temp;
 }

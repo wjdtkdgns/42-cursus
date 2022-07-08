@@ -14,6 +14,8 @@
 int	intlen(int n){
 	int	len;
 
+	if (n == 0)
+		return 1;
 	len = 0;
 	if (n < 0)
 		len++;

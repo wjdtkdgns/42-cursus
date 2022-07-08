@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-size_t	word_cnt(char *s, char c)
+size_t	word_cnt(const char *s, char c)
 {
 	size_t	count;
 
@@ -24,7 +24,8 @@ size_t	word_cnt(char *s, char c)
 			while (*s && *s != c)
 				s++;
 		}
-		s++;
+		else
+			s++;
 	}
 	return (count);
 }
@@ -32,7 +33,10 @@ size_t	word_cnt(char *s, char c)
 char	**freeel(char **temp, size_t idx)
 {
 	while (idx--)
+	{
 		free(temp[idx]);
+		temp[idx] = 0;	
+	}
 	free(temp);
 	temp = 0;
 	return (0);
@@ -44,7 +48,9 @@ char	**ft_split(char const *s, char c)
 	char	*str_start;
 	size_t	idx;
 
-	if (!(temp = (char **)malloc(sizeof(char *) * word_cnt((char *)s, c) + 1)))
+	if(!s)
+		return (0);
+	if (!(temp = (char **)malloc(sizeof(char *) * (word_cnt(s, c) + 1))))
 		return (0);
 	idx = 0;
 	while (*s)

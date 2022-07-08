@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-char	*ft_memchr(const char *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
+	unsigned char	*temp;
+
+	temp = (unsigned char *)s;
 	while (n--)
 	{
-		if (*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
+		if (*temp == (unsigned char)c)
+			return (temp);
+		temp++;
 	}
 	return (0);
 }
