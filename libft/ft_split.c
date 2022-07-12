@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-size_t	word_cnt(const char *s, char c)
+static size_t	word_cnt(const char *s, char c)
 {
 	size_t	count;
 
@@ -30,7 +30,7 @@ size_t	word_cnt(const char *s, char c)
 	return (count);
 }
 
-char	**freeel(char **temp, size_t idx)
+static char	**freeel(char **temp, size_t idx)
 {
 	while (idx--)
 	{

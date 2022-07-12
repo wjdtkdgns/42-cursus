@@ -27,7 +27,7 @@ else
 OBJ_FILES = $(OBJ)
 endif
 
-%.o : %.c
+%.o : %.c 
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
 
 $(NAME) : $(OBJ_FILES)

@@ -13,8 +13,8 @@
 
 int	ft_atoi(const char *str)
 {
-	size_t	result;
-	int		sign;
+	unsigned long long	result;
+	int					sign;
 
 	result = 0;
 	sign = 1;

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-int	intlen(int n){
+static int	intlen(int n){
 	int	len;
 
 	if (n == 0)
